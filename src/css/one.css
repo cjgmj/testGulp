@@ -1,0 +1,21 @@
+body {
+  /* background-color: red;
+  display: flex;
+  border-radius: 20px; */
+  margin: 10px 20px 10px 20px;
+  color: red;
+}
+
+/* Elimina esta duplicación */
+body {
+  color: red;
+}
+
+/* Une los dos selectores */
+.box {
+  display: flex;
+}
+
+.box2 {
+  display: flex;
+}

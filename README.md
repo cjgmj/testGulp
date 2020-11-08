@@ -1,16 +1,16 @@
 # testGulp
 
-[https://gulpjs.com/](Página oficial de Gulp)
+[Página oficial de Gulp](https://gulpjs.com)
 
 ## Instalación global
 
-npm install --global gulp-cli
+`npm install --global gulp-cli`
 
 ## Instalaciones para cada proyecto
 
-npm init
-npm install --save-dev gulp
-npm install --save-dev @babel/core @babel/register @babel/preset-env
+`npm init`
+`npm install --save-dev gulp`
+`npm install --save-dev @babel/core @babel/register @babel/preset-env`
 
 ## Archivos necesarios
 
@@ -21,6 +21,22 @@ Tendremos un archivo llamado `gulpfile.babel.js` en el que tendremos la configur
 gulp-babel: Este es el módulo que usará gulp para convertir el código a ES5. Instalación: `npm install --save-dev gulp-babel`.
 gulp-terser: Este módulo se usará para ofuscar el código. Instalación: `npm install --save-dev gulp-terser`.
 gulp-concat: Este módulo unirá todos los archivos JavaScript en uno. Instalación: `npm install --save-dev gulp-concat`.
+
+## Transpilar HTML
+
+gulp-htmlmin: Este módulo minifica y limpia los archivos HTML. Instalación: `npm install --save gulp-htmlmin`. Podemos ver las opciones disponibles [aquí](https://github.com/kangax/html-minifier).
+
+## Transpilar CSS
+
+gulp-postcss: Este módulo transforma los estilos con plugins de JavaScript. Instalación: `npm install --save-dev gulp-postcss`. [PostCSS Plugins](https://github.com/postcss/postcss/blob/master/docs/plugins.md)
+cssnano: Este módulo minifica y limpia los archivos CSS. Intalación: `npm install --save-dev cssnano`.
+autoprefixer: Añade los prefijos indicándoles para que navegadores se añadirán los prefijos. Para utilizar autoprefixer hay dos opciones, o añadir los navegadores a los que quieres dar soporte al package.json o hacerlo en un archivo separado `.browserslistrc`. Intalación: `npm install --save-dev autoprefixer`.
+
+postcss: Intalación `npm install --save-dev postcss`. Corrige error `PostCSS plugin autoprefixer requires PostCSS 8`.
+
+## Cosas a tener en cuenta
+
+Lo primero que tenemos que hacer en la tarea es concatenar los archivos js, si no se añadirá un `"use strict"` por cada archivo que haya sido compilado antes de hacer la unión. Si no indicamos preset en `babel` se usará será el del archivo `.babelrc`.
 
 ## Tareas de Gulp
 
