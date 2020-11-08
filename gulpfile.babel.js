@@ -6,16 +6,26 @@ import postcss from "gulp-postcss";
 import cssnano from "cssnano";
 import autoprefixer from "autoprefixer";
 
+// Clean CSS
+import clean from "gulp-purgecss";
+
 // JavaScript
 import gulp from "gulp";
 import babel from "gulp-babel";
 import terser from "gulp-terser";
+
+// PUG
+import pug from "gulp-pug";
+
+// SASS
+import sass from "gulp-sass";
 
 // Common
 import concat from "gulp-concat";
 
 // Variables / Constantes
 const cssPlugins = [cssnano(), autoprefixer()];
+const production = true;
 
 // Crear tarea
 // El primer parámetro el nombre de la tarea y el segundo la función que ejecutará
@@ -52,10 +62,46 @@ gulp.task("babel", () => {
     .pipe(gulp.dest("./public/js"));
 });
 
+gulp.task("views", () => {
+  return gulp
+    .src("./src/views/pages/*.pug")
+    .pipe(
+      pug({
+        pretty: production ? false : true,
+      })
+    )
+    .pipe(gulp.dest("./public"));
+});
+
+gulp.task("sass", () => {
+  return gulp
+    .src("./src/scss/styles.scss")
+    .pipe(
+      sass({
+        outputStyle: "compressed",
+      })
+    )
+    .pipe(gulp.dest("./public/css"));
+});
+
+// Tarea independiente ya que solo se ejcutará cuando el proyecto esté terminado
+gulp.task("clean", () => {
+  return gulp
+    .src("./public/css/styles.css")
+    .pipe(
+      clean({
+        content: ["./public/*.html"], // Array de los archivos a analizar para comprobar si las clases se usan
+      })
+    )
+    .pipe(gulp.dest("./public/css"));
+});
+
 // Tarea por defecto con un vigilante
 // Ejecutará la tarea indicada cuando se produzca un cambio en la carpeta
 gulp.task("default", () => {
-  gulp.watch("./src/*.html", gulp.series("html-min"));
-  gulp.watch("./src/css/*.css", gulp.series("styles"));
+  // gulp.watch("./src/*.html", gulp.series("html-min"));
+  // gulp.watch("./src/css/*.css", gulp.series("styles"));
+  gulp.watch("./src/views/**/*.pug", gulp.series("views"));
+  gulp.watch("./src/scss/**/*.scss", gulp.series("sass"));
   gulp.watch("./src/js/*.js", gulp.series("babel"));
 });
