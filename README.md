@@ -18,15 +18,27 @@
 
 Tendremos un archivo llamado `gulpfile.babel.js` en el que tendremos la configuración de Gulp, en caso de usar Babel 6 el archivo se llamará `gulpfile.js`.También crearemos un archivo `.babelrc` en el que indicamos la configuración de Babel, en ese archivo definiremos el plugin que será encargado de convertir el código.
 
+## Métodos básicos
+
+Gulp tiene cinco métodos básicos:
+
+- `task`: define las tareas, pasándole por parámetros el nombre de la tarea y la función que ejecutará.
+- `src`: indica la ruta desde la cuál se cogerán los archivos.
+- `dest`: indica la ruta destino de los archivos procesados.
+- `watch`: supervisa un directorio y ejecuta una tarea cuando sucede alguna acción definida. Con el primer parámetro se indica el directorio que supervisará y como segundo parámetro puede recibir un array de tareas, pasándo el nombre como string, o podemos usar `series` o `parallel` del propio Gulp.
+- `pipe`: obtiene los datos que se están procesando y los pasa a otro módulo u otro plugin.
+
 ## Transpilar JavaScript
 
-gulp-babel: este es el módulo que usará gulp para convertir el código a ES5. Instalación: `npm install --save-dev gulp-babel`.  
-gulp-terser: este módulo se usará para ofuscar el código. Instalación: `npm install --save-dev gulp-terser`.  
+gulp-babel: este es el módulo que usará gulp para convertir el código a ES5. Instalación: `npm install --save-dev gulp-babel`.
+
+gulp-terser: este módulo se usará para ofuscar el código. Instalación: `npm install --save-dev gulp-terser`.
+
 gulp-concat: este módulo unirá todos los archivos JavaScript en uno. Instalación: `npm install --save-dev gulp-concat`.
 
 ## Transpilar HTML
 
-gulp-htmlmin: este módulo minifica y limpia los archivos HTML. Instalación: `npm install --save gulp-htmlmin`. Podemos ver las opciones disponibles [aquí](https://github.com/kangax/html-minifier).
+gulp-htmlmin: este módulo minifica y limpia los archivos HTML. Instalación: `npm install --save-dev gulp-htmlmin`. Podemos ver las opciones disponibles [aquí](https://github.com/kangax/html-minifier).
 
 ## Transpilar CSS
 
@@ -69,6 +81,10 @@ gulp-cache-bust: añade una marca a las urls para obligar al navegador a no usar
 ## Control errores
 
 gulp-plumber: evita que en el caso de tener errores la aplicación se pare. Se añade después de `src`. Instalación: `npm install --save-dev gulp-plumber`.
+
+## Crear mapas
+
+gulp-sourcemaps: añade al archivo CSS o al JS un mapeo entre el código original y el código transformado para poder debuggear el código. Instalación: `npm install --save-dev gulp-sourcemaps`.
 
 ## Cosas a tener en cuenta
 

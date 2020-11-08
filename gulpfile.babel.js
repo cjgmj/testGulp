@@ -14,6 +14,9 @@ import gulp from "gulp";
 import babel from "gulp-babel";
 import terser from "gulp-terser";
 
+// Sourcemaps
+import sourcemaps from "gulp-sourcemaps";
+
 // PUG
 import pug from "gulp-pug";
 
@@ -67,8 +70,10 @@ gulp.task("styles", () => {
   return gulp
     .src("./src/css/*.css")
     .pipe(plumber())
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(concat("styles-min.css"))
     .pipe(postcss(cssPlugins))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest("./public/css"))
     .pipe(stream());
 });
@@ -77,9 +82,11 @@ gulp.task("babel", () => {
   return gulp
     .src("./src/js/*.js")
     .pipe(plumber())
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(concat("scripts-min.js")) // El parámetro que recibe es el nombre resultante del archivo tras la unión
     .pipe(babel())
     .pipe(terser())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest("./public/js"));
 });
 
@@ -104,11 +111,13 @@ gulp.task("sass", () => {
   return gulp
     .src("./src/scss/styles.scss")
     .pipe(plumber())
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(
       sass({
         outputStyle: "compressed",
       })
     )
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest("./public/css"))
     .pipe(stream());
 });
